@@ -1,0 +1,12 @@
+name: vcf-to-bigquery-pipeline
+docker:
+  imageName: gcr.io/gcp-variant-transforms/gcp-variant-transforms
+  cmd: |
+    ./opt/gcp_variant_transforms/bin/vcf_to_bq \
+      --project p1rcc-brown \
+      --input_pattern gs://p1rcc-brown/bill/somatic/results/variants/somatic.snvs.snpeff.vcf \
+      --output_table p1rcc-brown:bill.somatic_snvs_snpeff \
+      --staging_location gs://p1rcc-brown/staging \
+      --temp_location gs://p1rcc-brown/temp \
+      --job_name vcf-to-bigquery \
+      --runner DataflowRunner
